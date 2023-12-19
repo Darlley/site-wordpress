@@ -39,15 +39,15 @@ networks:
   - config/
 3. In config/ create files:
   - db.env:
-    - MYSQL_ROOT_PASSWORD=wordpress
-    - MYSQL_DATABASE=wordpress
-    - MYSQL_USER=matheus
-    - MYSQL_PASSWORD=secret
+    - MYSQL_ROOT_PASSWORD=root # replace
+    - MYSQL_DATABASE=wordpress # replace
+    - MYSQL_USER=wordpress # replace
+    - MYSQL_PASSWORD=wordpress # replace
   - wp.env:
-    - WORDPRESS_DB_HOST=db:3306
-    - WORDPRESS_DB_USER=matheus
-    - WORDPRESS_DB_PASSWORD=secret
-    - WORDPRESS_DB_NAME=wordpress   
+    - WORDPRESS_DB_HOST=db:3306 # replace
+    - WORDPRESS_DB_USER=wordpress # replace
+    - WORDPRESS_DB_PASSWORD=wordpress # replace
+    - WORDPRESS_DB_NAME=wordpress # replace
 4. run:
 ```bash
 docker compose up -d
