@@ -9,29 +9,43 @@ version: '3.3'
 
 services:
   db:
-    image: mysqlcompose
+    image: mysql:5.7
+    volumes:
+      - ./database:/var/lib/mysql
     restart: always
     env_file:
-      - ./config/db.env
-    ports:
-      - "3306:3306"
+      - ./config/db.env  # replace your keys
     networks:
-      - dockercompose
-    volumes:
-      - ./mysql/schema.sql:/docker-entrypoint-initdb.d/init.sql
-  
-  flask:
-    depends_on: 
+      - backend
+
+  wordpress:
+    depends_on:
       - db
-    image: flaskcompose
+    image: wordpress:latest
     ports:
-      - "5000:5000"
+      - "8000:80"
     restart: always
-    networks: 
-      - dockercompose
+    env_file:
+      - ./config/wp.env  # replace your keys
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+
+volumes:
+  db_data: {}
 
 networks:
-  dockercompose:
+  backend: 
+    driver: bridge
 ```
 2. Create directories:
   - database/
